@@ -1,7 +1,9 @@
 from django.shortcuts import render,redirect
 
 from django.contrib.auth.forms import UserCreationForm
-from .forms import RegisterForm,LoginForm
+from .forms import RegisterForm,LoginForm,UserProfileForm
+from .models import *
+
 from django.contrib.auth import login,logout,authenticate
 # Create your views here.
 def index(request):
@@ -30,3 +32,14 @@ def login_user(request):
             login(request,user)
             return redirect('index')
     return render(request, 'login.html',{'form':form})
+
+def profile(request):
+    if request.method == 'POST':
+        form = UserProfileForm(request.POST,request.FILES,instance=request.user.profile)
+        if form.is_valid():
+            form.save()
+            return redirect('index')
+    else:
+        form = UserProfileForm()
+    return render(request,'profile/profile.html',{'form':form})
+    
