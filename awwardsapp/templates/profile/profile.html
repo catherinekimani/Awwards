@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="card" style="width: 18rem;">
+        {% if user.profile.user_profile %}
+        <img src="{{user.profile.user_profile.url}}" class="img-fluid" alt="">
+        <div class="card-body">
+        <h5 class="card-title">{{user.username}}</h5>
+        <p class="card-text">{{user.profile.bio}}</h5></p>
+        <a href="#" class="btn-sm btn-primary">{{user.profile.contact}}</a>
+        </div>
+        {% else %}
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT4W6xgInhHMPzfDvsq0YvMXgYUJlqzOjM1dA&usqp=CAU" class="img-fluid" alt="">
+        <div class="card-body">
+        <h5 class="card-title">{{user.username}}</h5>
+        <p class="card-text">{{user.profile.bio}}</h5></p>
+        <a href="#" class="btn-sm btn-outline-info">{{user.profile.contact}}</a>
+        </div>
+        {% endif %}
+    </div>
+    {% endblock %}
