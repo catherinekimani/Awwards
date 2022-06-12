@@ -32,7 +32,14 @@ class LoginForm(UserCreationForm):
         self.fields['password1'].widget.attrs['class'] = 'form-control'
         self.fields['password2'].widget.attrs['class'] = 'form-control'
 
-class UserProfileForm():
+class UserProfileForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ['bio','user_profile','contact']
+        
+class ProfileUpdateForm(forms.ModelForm):
+    bio = forms.CharField(required=True,widget=forms.TextInput(attrs={'class':'form-control'}))
+    
     class Meta:
         model = Profile
         fields = ['bio','user_profile','contact']
