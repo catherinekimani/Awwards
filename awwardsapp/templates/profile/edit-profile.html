@@ -1,0 +1,16 @@
+<div class="row">
+    <div class="col-md-6">
+        {% include 'profile/profile.html' %}
+    </div>
+{% load bootstrap5 %}
+<div class="col-md-6">
+<form action="" method="post" enctype="multipart/form-data" class="w-50 rounded border border-dark">
+        {%csrf_token%}
+        {% bootstrap_form form%}
+        <input type="submit" class="btn btn-info btn-sm" value="Update">
+    </form>
+    </div>
+    </div>
+{% block scripts %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+{% bootstrap_javascript %} {% endblock %}
