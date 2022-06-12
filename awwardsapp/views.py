@@ -34,21 +34,18 @@ def login_user(request):
     return render(request, 'login.html',{'form':form})
 
 def profile(request):
-    if request.method == 'POST':
-        form = UserProfileForm(request.POST,request.FILES,instance=request.user.profile)
-        if form.is_valid():
-            form.save()
-            return redirect('index')
-    else:
-        form = UserProfileForm()
-    return render(request,'profile/profile.html',{'form':form})
+    
+    return render(request,'profile/profile.html')
     
 def edit_profile(request):
     if request.method == 'POST':
+        form = UserProfileForm(request.POST,instance=request.user)
         form = ProfileUpdateForm(request.POST,request.FILES,instance=request.user.profile)
-        if form.is_valid():
+        if form.is_valid() and form.is_valid():
+            form.save()
             form.save()
             return redirect('profile')
     else:
-        form = ProfileUpdateForm(instance=request.user)
-    return render(request, 'profile/edit-profile.html',{'form':form})
+        form = UserProfileForm(instance=request.user)
+        form = ProfileUpdateForm(instance=request.user.profile)
+    return render(request,'profile/edit-profile.html', {'form':form})
