@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
-    <div class="card" style="width: 18rem;">
+    <div class="card mt-5 pt-4" style="width: 18rem;">
         {% if user.profile.user_profile %}
         <img src="{{user.profile.user_profile.url}}" class="img-fluid" alt="">
         <div class="card-body">
