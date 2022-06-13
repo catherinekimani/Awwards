@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
-    <div class="card mt-5 pt-4" style="width: 18rem;">
+<div>
+    <div class="card mt-2 " style="width: 18rem;">
         {% if user.profile.user_profile %}
         <img src="{{user.profile.user_profile.url}}" class="img-fluid" alt="">
         <div class="card-body">
@@ -16,5 +17,21 @@
         <a href="#" class="btn-sm btn-outline-info">{{user.profile.contact}}</a>
         </div>
         {% endif %}
+    </div>
+    <h3 ><u>Your Projects</u></h3>
+    <div class="row">
+        {% for post in post %}
+        <div class="col-md-3">
+    <div class="card" style="width: 18rem;">
+    <img src="{{ post.image.url }}" class="card-img-top" alt="..." class="img-fluid">
+    <div class="card-body">
+    <h5 class="card-title">{{ post.title}}</h5>
+    <p class="card-text">{{ post.description }}</p>
+    <p>{{post.technologies}}</p>
+    <a href="#">{{ post.url }}</a>
+    </div>
+    </div>
+    </div>
+    {% endfor %}
     </div>
     {% endblock %}
