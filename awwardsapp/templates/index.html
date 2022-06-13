@@ -1,3 +1,52 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block content %}
+    <div class="header">
+        <p class="text-center" style="color: rgb(33, 244, 194);font-family: 'Times New Roman', Times, serif;">Project Awwards</p>
+        <div class="rate d-block mx-auto d-flex pe-5 justify-content-center py-5">
+        <img src="https://cdn-icons-png.flaticon.com/128/5696/5696307.png" alt="" class="img-fluid" style="width: 50px;height: 50px;">
+        <img src="https://cdn-icons-png.flaticon.com/128/5696/5696229.png" alt="" class="img-fluid" style="width: 50px;height: 50px;">
+        <img src="https://cdn-icons-png.flaticon.com/128/5696/5696129.png" alt="" class="img-fluid" style="width: 50px;height: 50px;">
+        <img src="https://cdn-icons-png.flaticon.com/128/5696/5696129.png" alt="" class="img-fluid" style="width: 50px;height: 50px;">
+        </div>
+    <nav class="navbar navbar-light w-70">
+    <div class="container-fluid ">
+    <form class="d-flex" style="margin-left: 38%;margin-top: 1%;">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+    <i class="fa fa-search" aria-hidden="true"></i>
+    </form>
+    </div>
+</nav>
+<a href="https://github.com/catherinekimani/Awwards"><button class=" btn btn-sm btn-info ms-5 mt-5 text-white">Visit site</button></a>
+    </div>
+    
+    <h3><marquee behavior="" direction="right">Projects</marquee></h3>
+    <div class="row row-cols-1 row-cols-md-2 g-2" style="box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;">
+    {% for post in post %}
+        <!-- Button trigger modal -->
+<img src="{{post.image.url}}" alt="" data-bs-toggle="modal" data-bs-target="#exampleModal{{post.id}}" class="img-fluid img" >
+<!-- Modal -->
+<div class="modal fade" id="exampleModal{{post.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Project Details</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <img src="{{post.image.url}}" alt="" class="img-fluid">
+        <h5>{{post.title}}</h5>
+        <p>{{post.description}}</p>
+        <p>{{post.technologies}}</p>
+        <a href="">{{post.url}}</a>
+        <p>{{post.date_posted}}</p>
+        </div>
+        <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+    </div>
+    </div>
+</div>
+    {% endfor %}
+</div>
 {% endblock %}
