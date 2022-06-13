@@ -35,7 +35,7 @@ class LoginForm(UserCreationForm):
 class UserProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ['bio','user_profile','contact']
+        fields = ['bio','user']
         
 class ProfileUpdateForm(forms.ModelForm):
     bio = forms.CharField(required=True,widget=forms.TextInput(attrs={'class':'form-control'}))
@@ -43,3 +43,8 @@ class ProfileUpdateForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ['bio','user_profile','contact']
+        
+class PostProjectForm(forms.ModelForm):
+    class Meta:
+        model = Post
+        fields = ['image','title','description','url','technologies']
