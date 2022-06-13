@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'awwardsapp.apps.AwwardsappConfig',
     'bootstrap5',
     'cloudinary',
+    'rest_framework',
     'django_static_fontawesome',
     'django.contrib.admin',
     'django.contrib.auth',
