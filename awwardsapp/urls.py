@@ -10,5 +10,7 @@ urlpatterns = [
     path('profile/',views.profile,name='profile'),
     path('edit-profile',views.edit_profile,name='edit-profile'),
     
-    path('project',views.project,name='project')
+    path('project',views.project,name='project'),
+    path('api/post/',views.ProjectList.as_view(),name=''),
+    path('api/profile/',views.ProfileList.as_view(),name='')
 ]

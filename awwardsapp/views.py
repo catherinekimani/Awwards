@@ -1,10 +1,18 @@
 from django.shortcuts import render,redirect
 
 from django.contrib.auth.forms import UserCreationForm
-from .forms import RegisterForm,LoginForm,UserProfileForm,ProfileUpdateForm,PostProjectForm
+from .forms import RegisterForm,LoginForm,UserProfileForm,ProfileUpdateForm,PostProjectForm,RatingProjectForm
 from .models import *
 
 from django.contrib.auth import login,logout,authenticate
+
+from rest_framework.response import Response
+from rest_framework import status
+from rest_framework.views import APIView
+from .serializer import ProjectSerializer,ProfileSerializer
+from awwardsapp import serializer
+from .permissions import IsAdminOrReadOnly
+
 # Create your views here.
 def index(request):
     post = Post.objects.all()
@@ -36,8 +44,10 @@ def login_user(request):
     return render(request, 'login.html',{'form':form})
 
 def profile(request):
-    
-    return render(request,'profile/profile.html')
+    current_user = request.user
+    profile = Profile.objects.filter(user_id=current_user.id).first()
+    post = Post.objects.filter(user_id=current_user.id).all() 
+    return render(request,'profile/profile.html',{"profile":profile,'post':post})
     
 def edit_profile(request):
     if request.method == 'POST':
@@ -65,3 +75,32 @@ def project(request):
     else:
         form = PostProjectForm()
     return render(request,'project.html',{"user":current_user,"form":form})
+
+class ProjectList(APIView):
+    permission_classes=(IsAdminOrReadOnly, )
+    def get(self,request, format=None):
+        all_projects = Post.objects.all()
+        serializers = ProjectSerializer(all_projects, many=True)
+        return Response(serializers.data)
+    
+    def post(self,request,format=None):
+        serializers = ProjectSerializer(data=request.data)
+        if serializers.is_valid():
+            serializers.save()
+            return Response(serializers.data,status=status.HTTP_201_CREATED)
+        return Response(serializers.errors,status=status.HTTP_400_BAD_REQUEST)
+    
+class ProfileList(APIView):
+    permission_classes=(IsAdminOrReadOnly, )
+    def get(self,request, format=None):
+        all_projects = Profile.objects.all()
+        serializers = ProfileSerializer(all_projects, many=True)
+        return Response(serializers.data)
+    
+    def post(self,request,format=None):
+        serializers = ProjectSerializer(data=request.data)
+        if serializers.is_valid():
+            serializers.save()
+            return Response(serializers.data,status=status.HTTP_201_CREATED)
+        return Response(serializers.errors,status=status.HTTP_400_BAD_REQUEST)
+    
