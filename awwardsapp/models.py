@@ -11,6 +11,12 @@ class Profile(models.Model):
     bio = models.TextField()
     contact = models.EmailField(max_length=100)
     
+    def save_profile(self):
+        self.save()
+        
+    def delete_profile(self):
+        self.delete()
+    
     def __str__(self):
         return f'{self.user.username} Profile'
     
@@ -24,7 +30,7 @@ class Post(models.Model):
     technologies = models.CharField(max_length=200)
     
     @classmethod
-    def search_project(cls, title):
+    def search_by_title(cls, title):
         return cls.objects.filter(title__icontains=title).all()
     
     def save_post(self):
