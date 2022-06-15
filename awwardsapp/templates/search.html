@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="row">
+    {% if post%}
+    <h2 class="text-light text-center">Found {{ posts|length }} of searched term {{message}}</h2>
+    {% else %}
+    <h2 class="text-light text-center"> Found 0 posts for the search term {{message}}</h2>
+    {% endif %}
+</div>
+    <div class="row">
+        {% if post %}
+    {% for post in post %}
+    <div class="card mt-2" style="width: 25rem;">
+    <img src="{{post.image.url}}" class="img-fluid" alt="..." >
+    <div class="card-body">
+    <h5 class="card-title">{{post.title}}</h5>
+    <small class="card-text"><b>{{post.description}}</b></small>
+    <a href="#">{{post.url}}</a>
+    </div>
+</div>
+{% endfor %}
+{% endif %}
+</div>
+{% endblock %}
