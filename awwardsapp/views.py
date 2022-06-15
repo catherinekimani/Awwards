@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-
+from django.http.response import HttpResponseRedirect
 from django.contrib.auth.forms import UserCreationForm
 from .forms import RegisterForm,LoginForm,UserProfileForm,ProfileUpdateForm,PostProjectForm,RatingProjectForm
 from .models import *
@@ -123,15 +123,43 @@ def logout_user(request):
     logout (request)
     return redirect('login')
 
-def rate(request,post_id):
+def rate(request, post_id):
     form = RatingProjectForm()
-    if request.method == 'POST':
-        post = Post.objects.get(id = post_id)
-        current_user= request.user
-        design_rate = request.POST['design_rate']
-        content_rate = request.POST['content_rate']
-        usability_rate = request.POST['usability_rate']
-        return render(request,"project_details.html",{"post":post,'userbility':usability_rate,'design':design_rate,'usability':content_rate,'user':current_user,'form':form})
+    current_user = request.user
+    all_ratings = Rating.objects.filter(post=post_id).all()
+    post = Post.objects.get(pk = post_id)
+    ratings = Rating.objects.filter(user=request.user,post=post_id).first()
+    rating_status = None
+    if ratings is None:
+        rating_status = False
     else:
-        post = Post.objects.get(id = post_id) 
-        return render(request,"project_details.html",{"post":post,'form':form})
+        rating_status = True
+    if request.method == 'POST':
+        form = RatingProjectForm(request.POST)
+        if form.is_valid():
+            rate = form.save(commit=False)
+            rate.user = request.user
+            rate.post = post
+            rate.save()
+            post_ratings = Rating.objects.filter(post=post_id)
+#calculating design
+            design_rate = [design.design_rate for design in post_ratings]
+            design_rating_average = sum(design_rate) / len(design_rate)
+#calculating content
+            content_rate = [content.content_rate for content in post_ratings]
+            content_rating_average = sum(content_rate) / len(content_rate)
+#calculating usability
+            usability_rate = [usability.usability_rate for usability in post_ratings]
+            usability_rating_average = sum(usability_rate) / len(usability_rate)
+#calculating average
+            average_rate = (design_rating_average + usability_rating_average + content_rating_average) / 3
+            print(average_rate)
+            rate.design_rating_average = round(design_rating_average, 2)
+            rate.usability_rating_average = round(usability_rating_average, 2)
+            rate.content_rating_average = round(content_rating_average, 2)
+            rate.average_rate = round(average_rate, 2)
+            rate.save()
+            return HttpResponseRedirect(request.path_info)
+    else:
+        form = RatingProjectForm()
+        return render(request, 'project_details.html', {'current_user':current_user,'all_ratings':all_ratings,'post':post,'form': form,'rating_status': rating_status})
