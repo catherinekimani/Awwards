@@ -123,3 +123,44 @@ border: 1px solid rgba( 255, 255, 255, 0.18 );
 color: white;
 font-family: 'Times New Roman', Times, serif;
 }
+
+.centered {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);}
+    
+    .container img{
+        background-position: center;
+        background-size: cover;
+        height: 100vh;
+    }
+
+.centered p{
+    font-family: 'Times New Roman', Times, serif;
+    text-align: justify;
+    font-size: 1rem;
+    font-weight: bold;
+}
+.centered h2{
+    color: navy;
+    font-family: "billabong", sans-serif;
+    text-align: justify;
+    font-size: 2.8rem;
+}
+
+.pulse{
+    border-radius: 100rem;
+    padding: 1rem;
+    font-family: 'Avenir Next';
+    font-size: 1rem;
+    padding: .4rem 2rem;
+    color: black;
+    box-shadow: 0 0 6px 0 rgba(183, 119, 238, 0.5);
+    border: solid 3px transparent;
+    background-image: linear-gradient(rgba(181, 173, 173, 0), rgba(18, 18, 18, 0)), linear-gradient(101deg, #78e4ff, #ff48fa);
+    background-origin: border-box;
+    background-clip: content-box, border-box;
+    box-shadow: 2px 1000px 1px #fff inset;
+    
+}

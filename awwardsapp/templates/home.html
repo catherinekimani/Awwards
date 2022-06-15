@@ -1,0 +1,23 @@
+{% load bootstrap5 %}
+{% load static %}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    {% block styles %}
+        <link rel="stylesheet" type="text/css" href="{% static 'fontawesome/css/all.min.css' %}" />
+        <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    {% endblock %}
+
+<div class="container">
+    <img src="https://cdni.iconscout.com/illustration/premium/thumb/contact-us-3483604-2912020.png" alt="Snow" style="width:100%;">
+    <div class="centered">
+        <marquee behavior="" direction="left"><h2 class="text-center">Welcome To Awards Rating Site</h2></marquee>
+        <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi </p>
+        <div class="d-flex justify-content-center justify-content-evenly">
+        <a href="{% url 'edit-profile' %}" class="btn btn-outline-info bg-dark pulse btn-sm">GET STARTED</a>
+        <a href="{% url 'index' %}" class="btn btn-outline-info bg-dark pulse ">VIEW PROJECTS</a>
+        <a href="{% url 'edit-profile' %}" class="btn btn-outline-info bg-dark pulse">POST A PROJECT</a>
+
+        </div>
+    </div>
+</div>

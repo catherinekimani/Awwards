@@ -65,7 +65,7 @@ def edit_profile(request):
         form = UserProfileForm(instance=request.user)
         form = ProfileUpdateForm(instance=request.user.profile)
     return render(request,'profile/edit-profile.html', {'form':form})
-
+@login_required(login_url='/login/') 
 def project(request):
     current_user = request.user
     if request.method == 'POST':
@@ -163,3 +163,5 @@ def rate(request, post_id):
     else:
         form = RatingProjectForm()
         return render(request, 'project_details.html', {'current_user':current_user,'all_ratings':all_ratings,'post':post,'form': form,'rating_status': rating_status})
+def home(request):
+    return render(request,'home.html')
