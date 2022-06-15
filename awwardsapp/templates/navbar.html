@@ -1,34 +1,34 @@
-<div class="navbar navbar-dark bg-dark ">
-    <div class="container">
-        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="offcanvas offcanvas-start shadow w-25 h-50" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel1">
-            <div class="offcanvas-body">
-                <ul class="navbar-nav">
-                    <li><a href="/"> <span class="item-text">Home</span></a></li>
-                    <li><a href="{% url 'register' %}"> <span class="item-text">Register/Log in</span></a></li>
-                    <li><a href=""> <span class="item-text">Projects</span></a></li>
-                </ul>
-            </div>
-        </div>
-        <nav class="navbar">
-    
-</nav>
+<div class="navigation">
+    <div class="logo">
+        <a class="no-underline" href="{% url 'index' %}">
+            Awwards
+        </a>
     </div>
+    <form action="{% url 'search_results' %}" role="search" class="navbar-form">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search" name="title">
+                </div>
+            </form>
     {% if user.is_authenticated %}
-    <div class="dropdown">
-    <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
-    User
-    </button>
-    <ul class="dropdown-menu"  aria-labelledby="dropdownMenu2">
-    <li><a href="{% url 'profile' %}"><button class="dropdown-item" type="button">Profile</button></a></li>
-    <li><a href="{% url 'edit-profile' %}"><button class="dropdown-item" type="button">Edit Profile</button> </a></li>
-    <li><a href="{% url 'project' %}"><button class="dropdown-item" type="button">Post Project</button> </a></li>
-    <li><button class="dropdown-item" type="button">Logout</button></li>
-    </ul>
-    {% else %}
+    <div class="navigation-icons">
+        <a href="/"  class="navigation-link">
+            <i class="fa fa-home" aria-hidden="true"></i>
+        </a>
+        <a  href="{%url 'edit-profile' %}" class="navigation-link notifica">
+            <i class="fas fa-edit"></i>
+            </i>
+            </a>
+            <a class="navigation-link notifica" href="{% url 'project' %}" ><i class="fas fa-plus"></i></a>
+        <a href="{% url 'profile' %}" class="navigation-link">
+            <i class="far fa-user-circle"></i>
+        </a>
+        <a href="{% url 'logout' %}" id="signout" class="navigation-link">
+            <i class="fas fa-sign-out-alt"></i>
+        </a>
+        {% else %}
         <a href="{% url 'login' %}" class="navigation-link" ><i class="fa fa-sign-in" aria-hidden="true"></i></a>
+        
         {% endif %}
-</div>
+    </div>
+    
 </div>

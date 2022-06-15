@@ -1,14 +1,31 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-    <div class="row">
-    {% for post in post %}
-    <div class="card mt-2" style="width: 25rem;">
-    <img src="{{post.image.url}}" class="img-fluid" alt="..." >
-    <div class="card-body">
-    <h5 class="card-title">{{post.title}}</h5>
-    <small class="card-text"><b>{{post.description}}</b></small>
-    <a href="#">{{post.url}}</a>
+<div class="row row-cols-1 row-cols-md-3 g-4">
+{% for post in post %}
+    <!-- image trigger modal -->
+<img src="{{post.image.url}}" alt="" data-bs-toggle="modal" data-bs-target="#exampleModal{{post.id}}" class="img-fluid" >
+<!-- Modal -->
+<div class="modal fade" id="exampleModal{{post.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Project Details</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+        <h5>{{post.title}}</h5>
+        <p>{{post.description}}</p>
+        <p>Posted on {{post.date_posted}}</p>
+        <div class="d-flex justify-content-evenly">
+        <a href="{{post.url}}" class="btn btn-outline-info">View Site</a>
+        <a href="{% url 'rate' post.id %}" class="btn btn-outline-info">RATE NOW</a>
+        </div>
+        </div>
+        <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+    </div>
     </div>
 </div>
 {% endfor %}
