@@ -35,7 +35,7 @@ class LoginForm(UserCreationForm):
 class UserProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ['bio','user']
+        fields = ['bio','user','user_profile']
         
 class ProfileUpdateForm(forms.ModelForm):
     bio = forms.CharField(required=True,widget=forms.TextInput(attrs={'class':'form-control'}))
