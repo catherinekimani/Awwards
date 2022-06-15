@@ -49,6 +49,7 @@ class Rating(models.Model):
     design_rate = models.IntegerField(validators=[MinValueValidator(1),MaxValueValidator(10)],default=0)
     usability_rate = models.IntegerField(validators=[MinValueValidator(1),MaxValueValidator(10)],default=0)
     content_rate = models.IntegerField(validators=[MinValueValidator(1),MaxValueValidator(10)],default=0) 
+    average_rate = models.IntegerField(default=0, blank=True, null=True,validators=[MinValueValidator(1),MaxValueValidator(10)])
     date_posted = models.DateTimeField(auto_now_add=True)
     
     def save_rating(self):
