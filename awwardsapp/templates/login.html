@@ -12,4 +12,8 @@
             {{form.as_p}}
             {{form.errors}}
             <input type="submit" value="Login" class="btn-sm btn-info">
+            <div class=" link mt-4">
+            <div class="d-flex justify-content-center links">
+                Don't have an account? <a href="{% url 'register' %}" class="ml-2">Sign Up</a>
+            </div>
         </form>

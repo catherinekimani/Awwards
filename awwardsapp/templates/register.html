@@ -7,14 +7,12 @@
     {% endblock %}
 <h2 class="text-center">Register Account</h2>
     <div class="content">
-        <form action="" method="POST" class="w-50 mx-auto">
+        <form action="" method="POST" class="w-50 h-50 mx-auto">
             {% csrf_token %}
             {{form.as_p}}
             <input type="submit" value="Sign Up" class="btn-sm btn-info">
-        </form>
-        <div>
             <small class="text-muted">
                 Already Have an Account? <a href="{% url 'login' %}">Login</a>
             </small>
-        </div>
+        </form>
     </div>
