@@ -14,9 +14,7 @@
 {% include 'navbar.html'%}
 {% endblock %}
     <!-- image trigger modal -->
-<div class="row row-cols-1 row-cols-md-2 g-4">
-<img src="{{post.image.url}}" alt="" data-bs-toggle="modal" data-bs-target="#exampleModal{{post.id}}" class="img-fluid" >
-<!-- Modal -->
+<div class="row row-cols-1  g-4">
 <div class="modal fade" id="exampleModal{{post.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
     <div class="modal-content">
@@ -39,31 +37,68 @@
     </div>
     </div>
 </div>
-    <form action="" method="post" enctype="multipart/form-data" class="w-25 ms-5">
-        {%csrf_token%}
-        {% bootstrap_form form%}
-        <input type="submit" class="btn btn-info btn-sm" value="Rate">
-    </form>
-    </div>
-    {% for rating in rating %}
-            <div class="row text-center">
-                <div class="col-md-2">
-                    <p>{{user.username}}</p>
+    <div class="container-fluid">
+    
+    <!-- Looping through projects   -->
+    <div class="row project">
+        <div class="col-md-2"></div>
+        <!-- displaying projects projects -->
+        <div class="col-md-8">
+            <h2 class="text-info">{{ post.title }}</h2>
+            <img src="{{post.image.url}}" class="img-thumbnail" alt="Image" onclick="window.open(this.src)">
+            <P>{{ post.description}}</P>
+            <h5>Technologies used</h5>
+            <p>{{post.technologies}}</p>
+            <div class="row">
+                <div class="col-md-4">
+                    <a href="{{post.url}}">Live Site</a>
                 </div>
-                <div class="col-md-3">
-                    <p>Design: {{rating.design_rate}}</p>
+                <div class="col-md-4">
+                    <p>Posted: {{post.date_posted|timesince}} ago</p>
                 </div>
-                <div class="col-md-3">
-                    <p>Userbility: {{rating.userbility_rate}}</p>
-                </div>
-                <div class="col-md-3">
-                    <p>Content: {{rating.content_rate}}</p>
-                </div>
-                
+                <div class="col-md-4">
             </div>
-            {% empty %}
-            <p class="alert alert-danger" role="alert">No ratings yet!</p>
-            {% endfor %}
+            <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample"
+                aria-controls="offcanvasExample">
+                Rate Project
+            </button>
+            <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample"
+                aria-labelledby="offcanvasExampleLabel">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="offcanvasExampleLabel">Rate Project</h5>
+                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+                        aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <div>
+                        <form action="" method="post" enctype="multipart/form-data">
+                            {% csrf_token %} {% bootstrap_form form %}
+                            <button class="btn btn-success link">Rate</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <h2>Ratings</h2>
+            <table class="table" >
+                <th>Username</th>
+                <th>Design Rating</th>
+                <th>Usability Rating</th>
+                <th>Content Rating</th>
+                <th>Overal Score</th>
+                {% for rating in all_ratings %}
+                <tr>
+                    <td class="user ">{{ rating.user.username }}</td>
+                    <td class="design">{{ rating.design_rate}}</td>
+                    <td class="usability">{{ rating.usability_rate}}</td>
+                    <td class="content">{{ rating.content_rate }}</td>
+                    <td class="average">{{ rating.average_rate }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+</div>
     {% block script %}
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
