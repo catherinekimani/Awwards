@@ -1,7 +1,8 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-<div class="row row-cols-1 row-cols-md-3 g-4">
+<div class="row row-cols-1 row-cols-md-2 g-4">
+    {% if post %}
 {% for post in post %}
     <!-- image trigger modal -->
 <img src="{{post.image.url}}" alt="" data-bs-toggle="modal" data-bs-target="#exampleModal{{post.id}}" class="img-fluid" >
@@ -29,5 +30,6 @@
     </div>
 </div>
 {% endfor %}
+{% endif %}
 </div>
 {% endblock %}

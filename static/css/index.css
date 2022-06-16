@@ -141,6 +141,7 @@ font-family: 'Times New Roman', Times, serif;
     text-align: justify;
     font-size: 1rem;
     font-weight: bold;
+    color: #040107cf;
 }
 .centered h2{
     color: navy;
@@ -163,4 +164,47 @@ font-family: 'Times New Roman', Times, serif;
     background-clip: content-box, border-box;
     box-shadow: 2px 1000px 1px #fff inset;
     
+}
+
+.register{
+    background-color: #eef2f5;
+    font-family: 'Times New Roman', Times, serif;
+    color: #020320;
+    font-weight: bold;
+}
+
+.register h6{
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 3rem;
+    color: #020320;
+    font-weight: bold;
+}
+
+
+.login{
+    background-color: #eef2f5;
+    font-family: 'Times New Roman', Times, serif;
+    color: #020320;
+    font-weight: bold;
+}
+
+.login h2{
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 3rem;
+    color: #020320;
+    font-weight: bold;
+}
+
+.container,project{
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 1rem;
+    color: #020320;
+    font-weight: bold;
+}
+
+.profile{
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 1rem;
+    color: #020320;
+    font-weight: bold;
 }
