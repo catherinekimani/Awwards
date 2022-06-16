@@ -3,7 +3,7 @@ from django.http.response import HttpResponseRedirect
 from django.contrib.auth.forms import UserCreationForm
 from .forms import RegisterForm,LoginForm,UserProfileForm,ProfileUpdateForm,PostProjectForm,RatingProjectForm
 from .models import *
-
+from django.contrib.auth.models import User
 from django.contrib.auth import login,logout,authenticate
 from django.contrib.auth.decorators import login_required
 
@@ -54,6 +54,7 @@ def profile(request):
 
 @login_required(login_url='/login/')
 def edit_profile(request):
+    Profile.objects.get_or_create(user=request.user)
     if request.method == 'POST':
         form = UserProfileForm(request.POST,instance=request.user)
         form = ProfileUpdateForm(request.POST,request.FILES,instance=request.user.profile)
@@ -109,16 +110,14 @@ class ProfileList(APIView):
         return Response(serializers.errors,status=status.HTTP_400_BAD_REQUEST)
     
 def search_results(request):
-    if 'title' in request.GET and request.GET['title']:
-        search_term = request.GET['title'].lower()
-        posts = Post.search_by_title(search_term)
-        message = f'{search_term}'
-
-        return render(request, 'search.html', {'found': message, 'posts': posts})
+    if 'title' in request.GET and request.GET["title"]:
+        search_term = request.GET["title"]
+        searched_posts =Post.search_by_title(search_term)
+        message = f"{search_term}"
+        return render(request, 'search.html',{"message":message,"searched_posts": searched_posts})
     else:
-        message = 'Not found'
-        return render(request, 'search.html', {'danger': message})
-
+        message = "You haven't searched for any term"
+    return render(request, 'search.html',{"message":message})
 def logout_user(request):
     logout (request)
     return redirect('login')

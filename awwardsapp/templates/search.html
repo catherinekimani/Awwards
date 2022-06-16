@@ -1,24 +1,22 @@
-{% extends 'base.html' %}
+{%extends 'base.html'%}
 {% block content %}
-    <div class="row">
-    {% if post%}
-    <h2 class="text-light text-center">Found {{ posts|length }} of searched term {{message}}</h2>
-    {% else %}
-    <h2 class="text-light text-center"> Found 0 posts for the search term {{message}}</h2>
-    {% endif %}
-</div>
-    <div class="row">
-        {% if post %}
+{{block.super}}
+<div class="row row-cols-1 row-cols-md-3 g-4">
     {% for post in post %}
-    <div class="card mt-2" style="width: 25rem;">
-    <img src="{{post.image.url}}" class="img-fluid" alt="..." >
-    <div class="card-body">
-    <h5 class="card-title">{{post.title}}</h5>
-    <small class="card-text"><b>{{post.description}}</b></small>
-    <a href="#">{{post.url}}</a>
+    <div class="col">
+        <div class="card">
+            <div class="card-body">
+                <img src="{{post.image.url}}" class="img-responsive" alt="Image" height="90vh">
+                <h5 class="card-title">{{post.title }}</h5>
+                <p class="card-text">{{ post.description }}</p>
+            </div>
+        </div>
     </div>
-</div>
-{% endfor %}
-{% endif %}
+    {% empty %}
+    <div class="row">
+        <br> <br> <br>
+        <h2 class="text-center mt-5">No such Title</h2>
+    </div>
+    {% endfor %}
 </div>
 {% endblock %}
