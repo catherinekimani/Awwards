@@ -16,7 +16,7 @@
 + [Authors Info](#author-Info)
 
 ## Description
-<P> </p>
+<P>A django application that allows a user to post the projects they have done. Users are also able to see the ratings on their projects. </p>
 
 ## User Stories
 <P>As a User I would like to:</p>
@@ -28,6 +28,7 @@
 * View my profile page
 
 ## Live Link
+https://kate-awards.herokuapp.com/
 
 ## Installation
 
